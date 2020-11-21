@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %}Articles list{% endblock %}
+{% block body %}
+
+    {% for message in app.flashes('message') %}
+        <div class="alert alert-success text-center m-auto">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="jumbotron text-center m-auto">
+        <h1> Home page</h1>
+        <p>Lorem klsjkjkjddkmcccccccccccccccccccccc</p>
+    </div>
+    <div class="container">
+        <h2> les derniers articles </h2>
+        <div class="row flex">
+            {% for article in articles %}
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="#">   {{ article.titre }} </a>
+                            </h5>
+                            <p class="card-text"> {{ article.CreatedAt|date('d/m/y a h\\hi')}}  {{ article.CreatedAt|date('d/m/y a h\\hi') }} </p>
+                            <div class="text-primary" style="font-weight: bold;font-size: 2rem;"> {{ article.module }}</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            {{ knp_pagination_render(articles) }}
+        </div>
+    </div>
+
+{% endblock %}

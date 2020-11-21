@@ -1,0 +1,90 @@
+easy_admin:
+  # On définit le nom de l'interface d'administration
+  site_name: 'Gestion de ensetm-course'
+  # On définit l'affichage de l'utilisateur
+  user:
+    display_name: true
+    display_avatar: false
+  design:
+    # Ces lignes sont utiles pour CKEditor
+    form_theme:
+      - "@EasyAdmin/form/bootstrap_4.html.twig"
+      - "@FOSCKEditor/Form/ckeditor_widget.html.twig"
+    # Ces lignes définiront notre menu
+    menu:
+      - { label: 'Articles' }
+      - { entity: 'Articles', label: 'Articles', icon: 'book' }
+      - { entity: 'Departements', label: 'Departements', icon: 'home' }
+      - { entity: 'Filieres', label: 'Filières', icon: 'tag' }
+      - { label: 'Utilisateurs' }
+      - { entity: 'Users', label: 'Utilisateurs', icon: 'user' }
+  formats:
+    # Ici on définit le format des dates
+    datetime: 'd/m/Y à H:i'
+  entities:
+    Articles:
+      # Correspond au fichier Articles.php
+      class: App\Entity\Articles
+      # On définit ci-dessous le contenu de la liste qui affichera les article et les critères de tri
+      list:
+        fields:
+          - id
+          - titre
+          - module
+          - semestre
+          - { property: 'created_at', label: 'Créé' }
+          # Les Filières  sont listés ci-dessous
+          - { property: 'Filiers', label: 'Filieres', type: 'array'}
+          - { property: 'files', label: 'files', type: 'array'}
+        sort: ['created_at', 'desc']
+      # On définit ci-dessous le contenu du formulaire d'ajout ou modification d'article
+      form:
+        fields:
+          - titre
+          # Affichage de l'éditeur Wysiwyg
+          - { property: 'contenu', type: 'fos_ckeditor', type_options: { config_name: 'main_config' }}
+          - module
+          - semestre
+          - users
+          # Les catégories et mots-clés peuvent s'afficher avec une sélection multiple
+          - { property: 'Filiers', label: 'Filieres', type: 'entity', type_options: { class: 'App\Entity\Filieres', multiple: true,by_reference: false, attr: { data-widget: 'select2' }}}
+          - { property: 'files', label: 'files', type: 'entity', type_options: { class: 'App\Entity\Files', multiple: true,by_reference: false, attr: { data-widget: 'select2' }}}
+    Departements:
+      class: App\Entity\Departements
+      label: 'Departements'
+      list:
+        fields:
+          - nom_dep
+          - { property: 'featured_image', label: 'Image', type: 'image', base_path: '%app.path.featured_image%' }
+          - { property: 'filieres', label: 'filieres', type: 'array'}
+      form:
+        fields:
+          - nom_dep
+          - { property: 'imageFile', type: 'vich_image', label: 'Image' }
+          - { property: 'filieres', label: 'filieres', type: 'entity', type_options: { class: 'App\Entity\Filieres', multiple: true,by_reference: false, attr: { data-widget: 'select2' }}}
+    Filieres:
+      class: App\Entity\Filieres
+      label: 'Filieres'
+      list:
+        fields:
+          - nom
+          - article
+          - { property: 'departements', label: 'departement'}
+      form:
+        fields:
+          - nom
+          - { property: 'departements', label: 'departement', type: 'entity', type_options: { class: 'App\Entity\Departements', multiple: true,by_reference: false, attr: { data-widget: 'select2' }}}
+    Users:
+      class: App\Entity\Users
+      label: 'Utilisateurs'
+      list:
+        fields:
+          - id
+          - email
+          - { property: 'roles', label: 'Rôles', type: json_array}
+      form:
+        fields:
+          - prenom
+          - nom
+          - email
+          - { property: 'roles', label: 'Rôles', type: choice, type_options: {expanded: true, multiple: true, choices: {'Utilisateur':'ROLE_USER', 'Administrateur':'ROLE_ADMIN', 'Etudient':'ROLE_ETUD', 'Enseignant':'ROLE_PROF', 'Responsable': 'ROLE_RESP'}}}

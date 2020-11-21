@@ -1,0 +1,70 @@
+<div class="container site">
+    <div class="sidebar">
+        <h5>Pour </h5>
+        {{ form_start(form) }}
+             <div class="form-group">
+                {{ form_row(form.Filiers) }}
+            </div>
+          <div class="form-group">
+            {{ form_row(form.semestre) }}
+            </div>
+
+    </div>
+    <main class="main">
+     <article class="contenu">
+          <header class="card-header card-header-avatar">
+
+               <div class="card-title">
+                <div class="form-group">
+                {{ form_row(form.titre) }}
+                  </div>
+                <div class="form-group">
+                {{ form_row(form.module) }}
+                    </div>
+               </div>
+            </header>
+             <div class="card-body">
+
+            {{ form_row(form.contenu) }}
+              </div>
+      <footer class="coter">
+           <button class="btn">{{ button_label|default('Save') }}</button>
+        </footer>
+     </article>
+    </main>
+    <aside class="aside">
+        <article class="profil">
+            <header class="card-header card-header-avatar">
+                <div class="card-title">ajouter un fichier </div>
+            </header>
+            <div class="card-body">
+                <div class="form-group ">
+                    {{ form_row(form.files) }}
+                </div>
+
+            </div>
+        </article>
+        {# si la route est articles_edit on affiche les docs#}
+        {% if app.request.attributes.get('_route') == 'articles_edit' %}
+        <div class="sidebar-title">les fichiers  </div>
+        <div class="file-list">
+            {% for file in article.files %}
+                       <div class="file">
+
+                   <div class="file-body">
+                       <a href="{{ asset('/uploadsFile/' ~ file.name)}}" class="file-name" >{{ file.originalName }} </a>
+                       <a href="{{ path('articles_delete_file',{id: file.id}) }}"
+                          data-delete data-token="{{ csrf_token('delete' ~ file.id) }}" class="file-add"> supprimer</a>
+                </div>
+                     </div>
+            {% endfor %}
+
+        </div>
+            {{ form_end(form) }}
+        {% endif %}
+    </aside>
+
+
+
+
+</div>

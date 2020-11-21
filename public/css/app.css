@@ -1,0 +1,109 @@
+.site{
+    margin-top: 20px ;
+    margin-bottom: 20px ;
+}
+
+
+.sidebar{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 12px;
+    margin-bottom: 20px;
+
+}
+
+
+.card-body{
+    padding: 0 0px 0px 0px;
+}
+.card-footer{
+    border-top: solid 1px #DBDBDB;
+    background: #fbfbfb;
+    display: flex;
+    padding: 10px;
+    font-size: 12px;
+    color: #BDBDBD;
+    justify-content: space-between;
+}
+.card-title{
+    font-weight: bold;
+    color: #000;
+    font-size: 18px;
+    margin: 5px 0;
+}
+.main{
+    margin-bottom: 20px;
+}
+
+.sidebar-title::after{
+    content: '';
+    display:block;
+    height: 1px;
+    width: 100%;
+    margin-top: -2px;
+    background: #000;
+}
+.file{
+    margin:14px 0;
+    display: flex;
+    color: #000;
+}
+
+.file_body{
+    display:flex;
+    flex-direction: column;
+    color: #000;
+}
+
+.file-name{
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+    color: #000;
+}
+.file-add{
+    font-size: 12px;
+    color: #000;
+    margin-top: auto;
+
+}
+.file-add::before{
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 13px;
+    background: center center / 18px 13px no-repeat ;
+    vertical-align: middle;
+    margin-right: 5px;
+    border: solid 1px lightblue;
+}
+
+
+
+@media only screen and (min-width:950px){
+
+    .site{
+        display: flex;
+    }
+    .sidebar{
+        display: block;
+        flex: none;
+        width: 180px ;
+    }
+
+    .sidebar div{
+        width:100%;
+    }
+    .main{
+        width: 100%;
+        margin-left:30px;
+        margin-right:30px;
+    }
+    .aside{
+        flex: none;
+        width: 310px;
+    }
+    .profil{
+        display: block;
+    }
+}

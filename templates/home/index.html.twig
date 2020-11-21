@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}acceuil{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('message') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="jumbotron text-center m-auto">
+        <h1> Home page</h1>
+        <p>Lorem klsjkjkjddkmcccccccccccccccccccccc</p>
+    </div>
+    <div class="container">
+        <div class="big-title">
+        <h2> les departements </h2>
+         <div class="hr-title"></div>
+        </div>
+        <div class="row flex">
+
+            {% for departement in departements %}
+                <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                    <a href="{{ path('departement',{id:departement.id,slug:departement.slug})}}" >
+                        <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                {{ departement.NomDep }}
+                            </h5>
+
+                        </div>
+                    </div>
+                    </a>
+                </div>
+
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
