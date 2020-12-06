@@ -15,10 +15,11 @@
             <div class="big-title">
 
             </div>
+        </div>
             <div class="row flex">
                 {% for filiere in departements.filieres %}
-                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 filiere">
-                    <a href="#">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
+                    <a href="{{ path('Filiere',{id:filiere.id,slug:filiere.slug})}}">
                     <div class="card subject-box">
                         <div class="card-body">
                             <h5 class="card-title">
@@ -30,6 +31,7 @@
                     </a>
                 </div>
                 {% endfor %}
-            </div>
+             </div>
+
     </section>
 {% endblock %}

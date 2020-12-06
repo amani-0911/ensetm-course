@@ -22,13 +22,21 @@ class ArticlesType extends AbstractType
             ->add('module', TextType::class)
             ->add('semestre', TextType::class)
             ->add('Filiers', EntityType::class,[
+                'required' => true,
                 'class' => Filieres::class,
-                'label' => 'filières',
-                'multiple' => true
+                'label' => false,
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'attr' =>[
+                    'class' =>'select-fil'
+                ]
             ])
-            ->add('files', FileType::class,
-                [ 'multiple' => true,
-                    'mapped' =>false])
+            ->add('files', FileType::class,[
+                  'required' => false,
+                  'label' => false,
+                  'multiple' => true,
+                    'mapped' =>false
+            ])
         ;
 
     }
@@ -39,4 +47,5 @@ class ArticlesType extends AbstractType
             'data_class' => Articles::class,
         ]);
     }
+
 }

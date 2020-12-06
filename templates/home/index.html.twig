@@ -9,8 +9,27 @@
         </div>
     {% endfor %}
     <div class="jumbotron text-center m-auto">
-        <h1> Home page</h1>
-        <p>Lorem klsjkjkjddkmcccccccccccccccccccccc</p>
+
+       <div class="container">
+           {{ form_start(formSearch) }}
+           <div class="form-row align-items-end">
+               <div class="col">
+                   {{ form_row(formSearch.moduleSearched) }}
+               </div>
+               <div class="col">
+                   {{ form_row(formSearch.semestreSearched) }}
+               </div>
+               <div class="col">
+                   {{ form_row(formSearch.filieresSearched) }}
+               </div>
+               <div class="form-group">
+                   <button class="btn btn-primary">Rechercher</button>
+               </div>
+
+           </div>
+
+           {{ form_end(formSearch) }}
+       </div>
     </div>
     <div class="container">
         <div class="big-title">

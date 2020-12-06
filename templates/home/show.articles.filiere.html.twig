@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
-{% block title %}Articles list{% endblock %}
+
+{% block title %}courses{% endblock %}
+
 {% block body %}
-
-    {% for message in app.flashes('message') %}
-        <div class="alert alert-success text-center m-auto">
-            {{ message }}
+    <div class="page-heading title-lg">
+        <div class="container">
+            <h3>
+                <a style="text-decoration: none;" href="{{ path('departement',{id:departement.id,slug:departement.slug})}}">{{departement.NomDep}}</a>
+                <i class="las la-arrow-right"></i>
+                <a style="text-decoration: none" href="#"> {{ filiere }}</a>
+            </h3>
         </div>
-    {% endfor %}
-
-    <div class="container">
-    <div class="jumbotron text-center m-auto">
+    </div>
+<div class="container">
     {{ form_start(formSearch) }}
     <div class="form-row align-items-end">
         <div class="col">
@@ -18,19 +21,19 @@
         <div class="col">
             {{ form_row(formSearch.semestreSearched) }}
         </div>
-        <div class="col">
-            {{ form_row(formSearch.filieresSearched) }}
-        </div>
         <div class="form-group">
             <button class="btn btn-primary">Rechercher</button>
         </div>
         {{ form_end(formSearch) }}
     </div>
-    </div>
-    <div class="courses text-center" >
+            <div class="big-title">
 
+            </div>
+
+<div class="courses text-center" >
     <div class="container">
-        <h2> les derniers articles </h2>
+
+
         <div class="row">
             {% for article in articles %}
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
@@ -38,16 +41,16 @@
 
                         <div class="course-box">
                             <div class="course-cover">
-                                <a href="{{ path('module', {'module': article.module}) }}">
-                                    <h3 class="card-title ">
-                                        {{ article.module }}
-                                    </h3>
-                                </a>
+                                      <a href="{{ path('module', {'module': article.module}) }}">
+                                          <h3 class="card-title ">
+                                              {{ article.module }}
+                                          </h3>
+                                      </a>
                                 <div class="course-instructor" data-toggle="tooltip" data-placement="top" title="l'enseignant">
-                                    <a href="{{ path('enseignant', {'id': article.users.id}) }}">
-                                        <i class="las la-graduation-cap"></i>
-                                        {{ article.users.prenom }}  {{ article.users.nom }}
-                                    </a>
+                                         <a href="{{ path('enseignant', {'id': article.users.id}) }}">
+                                             <i class="las la-graduation-cap"></i>
+                                             {{ article.users.prenom }}  {{ article.users.nom }}
+                                         </a>
                                 </div>
                             </div>
                             <a href="#">
@@ -78,27 +81,19 @@
                                     </div>
                                 </div>
                             </a>
-
-                                <div class="course-rating" data-toggle="tooltip" data-placement="top" title="filière">
-                                    <div class="rating-start rating-small">
-                                        {% for filiere in article.Filiers %}
-                                        <a href="{{ path('Filiere',{id:filiere.id,slug:filiere.slug})}}" style="font-size: 12px">
-                                            {{ filiere.nom}}
-                                            </a>
-                                        {% endfor %}
-                                    </div>
+                            <a href="#">
+                                <div class="course-rating" data-toggle="tooltip" data-placement="top" title="semestre">
+                                   <div class="rating-start rating-small">
+                                       {{ article.semestre}}
+                                   </div>
                                 </div>
-
+                            </a>
                         </div>
                     </a>
                 </div>
             {% endfor %}
         </div>
-        <div class="pagination">
-            {{ knp_pagination_render(articles) }}
-        </div>
     </div>
-    </div>
-    </div>
-
+</div>
+</div>
 {% endblock %}

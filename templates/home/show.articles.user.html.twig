@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}courses : {% if app.request.attributes.get('_route') == 'enseignant' %}
+    {{ user.prenom }}
+    {{ user.nom }}
+{% elseif  app.request.attributes.get('_route') == 'module' %}
+    {{ module }}
+{% elseif  app.request.attributes.get('_route') == 'semestre' %}
+    {{ semestre }}
+{% endif %} {% endblock %}
+
+{% block body %}
+    <div class="big-title">
+
+    </div>
+    <div class="page-heading title-lg">
+
+        <div class="container">
+            <h3>
+                Résultats de recherche pour :
+                {% if app.request.attributes.get('_route') == 'enseignant' %}
+                {{ user.prenom }}
+                {{ user.nom }}
+                {% elseif  app.request.attributes.get('_route') == 'module' %}
+                {{ module }}
+                {% endif %}
+
+            </h3>
+        </div>
+    </div>
+    <div class="big-title">
+
+    </div>
+
+    <div class="courses text-center" >
+        <div class="container">
+
+
+            <div class="row">
+                {% for article in articles %}
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                        <a href="#">
+
+                            <div class="course-box">
+                                <div class="course-cover">
+                                    <a href="{{ path('module', {'module': article.module}) }}">
+                                        <h3 class="card-title ">
+                                            {{ article.module }}
+                                        </h3>
+                                    </a>
+                                    <div class="course-instructor" data-toggle="tooltip" data-placement="top" title="l'enseignant">
+                                        <a href="{{ path('enseignant', {'id': article.users.id}) }}">
+                                            <i class="las la-graduation-cap"></i>
+                                            {{ article.users.prenom }}  {{ article.users.nom }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <a href="#">
+                                    <div class="course-heading">
+                                        <div class="course-title">
+                                            {{ article.titre}}
+                                        </div>
+
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="row course-meta">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 meta-item">
+                                            <div class data-toggle="tooltip" data-placement="top" title="Publiè le">
+
+                                                <i class="las la-clock"></i>
+                                                {{ article.updatedAt ? article.updatedAt|date('d/m/y a h\\hi'): '' }}
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 meta-item">
+                                            <div class data-toggle="tooltip" data-placement="top" title="Nombre de fichiers">
+
+                                                <i class="las la-file"></i>
+                                                {{ article.files|length }}
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#">
+                                    <div class="course-rating" data-toggle="tooltip" data-placement="top" title="semestre">
+                                        <div class="rating-start rating-small">
+                                            {{ article.semestre}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
