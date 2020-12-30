@@ -45,7 +45,7 @@ class Departements
      */
     private $featured_image;
     /**
-     * @Vich\UploadableField(mapping="featured_image",fileNameProperty="featured_image")
+     * @Vich\UploadableField(mapping="featured_images",fileNameProperty="featured_image")
      * @var File
      */
     private $imagefile;
@@ -58,22 +58,7 @@ class Departements
      */
     private $Updated_at;
 
-    /**
-     * @return File
-     */
-    public function getImagefile(): File
-    {
-        return $this->imagefile;
-    }
 
-
-    public function setImagefile(File $image=null)
-    {
-        $this->imagefile = $image;
-        if ($image){
-            $this->Updated_at=new \DateTime('now');
-        }
-    }
 
 
     public function __construct()
@@ -142,12 +127,28 @@ class Departements
         return $this->featured_image;
     }
 
-    public function setFeaturedImage(?string $featured_image)
+    public function setFeaturedImage($featured_image)
     {
         $this->featured_image = $featured_image;
 
         return $this;
     }
+
+    public function setImagefile(File $image=null)
+    {
+        $this->imagefile = $image;
+        if ($image){
+            $this->Updated_at=new \DateTime('now');
+        }
+    }
+
+     public function getImagefile()
+    {
+        return $this->imagefile;
+    }
+
+
+
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {

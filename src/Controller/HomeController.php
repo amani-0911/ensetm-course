@@ -50,7 +50,7 @@ class HomeController extends AbstractController
     }
     /**
      *
-     * @Route("/departements/{slug}-{id}", name="departement")
+     * @Route("/departements/{slug}/{id}", name="departement")
      */
     public function show(Departements $departements,string $slug): Response
     {
@@ -64,6 +64,18 @@ class HomeController extends AbstractController
 
         return $this->render('home/show.html.twig',[
             'departements' => $departements
+        ]);
+    }
+    /**
+     * @Route("article/{id}", name="article_detail")
+     */
+    public function showArticle(Articles $article): Response
+    {
+
+        $url=$this->generateUrl('article_detail',['id' =>$article->getId()]);
+        return $this->render('article/show.html.twig', [
+            'article' => $article,
+            'url'=>$url
         ]);
     }
     /**

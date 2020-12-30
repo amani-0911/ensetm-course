@@ -40,10 +40,10 @@ class ArticlesController extends AbstractController
         $article = new Articles();
         $form = $this->createForm(ArticlesType::class, $article);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $article->setUsers($this->getUser());
             $files=$form->get('files')->getData();
+
             foreach ($files as $file){
                 $fiches=md5(uniqid()).'.'.$file->guessExtension();
                 $file->move($this->getParameter('files_directory'),$fiches);
@@ -71,8 +71,10 @@ class ArticlesController extends AbstractController
      */
     public function show(Articles $article): Response
     {
+        $url=$this->generateUrl('articles_show',['id' =>$article->getId()]);
         return $this->render('articles/show.html.twig', [
             'article' => $article,
+            'url'=>$url
         ]);
     }
 

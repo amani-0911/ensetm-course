@@ -31,21 +31,25 @@
            {{ form_end(formSearch) }}
        </div>
     </div>
+    <section class="departements departements-home text-center">
     <div class="container">
         <div class="big-title">
         <h2> les departements </h2>
          <div class="hr-title"></div>
         </div>
-        <div class="row flex">
+        <div class="row">
 
             {% for departement in departements %}
                 <div class=" col-xs-12 col-sm-6 col-md-4 col-lg-4">
                     <a href="{{ path('departement',{id:departement.id,slug:departement.slug})}}" >
-                        <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">
-                                {{ departement.NomDep }}
-                            </h5>
+                        <div class="departement-box">
+                        <div class="departement-cover" style=" background:url('{{ vich_uploader_asset(departement,'imagefile') }}') no-repeat center center;-webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;">
+                            <div class="departement-overlay">
+                                <div class="thumb-content">
+                                    <div class="departement-icon"> <i class="las la-home"></i></div>
+                                  <div class="departement-name">{{ departement.NomDep }} </div>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -56,4 +60,5 @@
             {% endfor %}
         </div>
     </div>
+    </section>
 {% endblock %}

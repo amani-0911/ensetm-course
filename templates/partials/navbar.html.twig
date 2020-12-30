@@ -14,11 +14,6 @@
                 <a class="nav-link {% if current_menu1 is defined and current_menu1 == 'visité' %}active{% endif %}" href="{{ path('articles_index') }}">Ajouter</a>
             </li>
             {% endif %}
-            {% if is_granted('ROLE_RESP') %}
-                <li class="nav-item ">
-                    <a class="nav-link {% if current_menu2 is defined and current_menu2 == 'visité' %}active{% endif %}" href="{{ path('resp_index') }}">Responsable</a>
-                </li>
-            {% endif %}
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item ">
                     <a class="nav-link " href="\admin">Admin</a>

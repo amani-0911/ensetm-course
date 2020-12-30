@@ -27,8 +27,8 @@
 
             {{ form_row(form.contenu) }}
               </div>
-      <footer class="coter">
-           <button class="btn btn-done">{{ button_label|default('Save') }}</button>
+      <footer class="coter d-grid gap-2 col-6 mx-auto float-lg-right">
+           <button class="btn " style="color:snow;background-color: #2051a9;width: 200px">{{ button_label|default('Enregistrer') }}</button>
         </footer>
      </article>
     </main>
@@ -55,7 +55,7 @@
                    <div class="file-body">
                        <a href="{{ asset('/uploadsFile/' ~ file.name)}}" class="file-name" >{{ file.originalName }} </a>
                        <a href="{{ path('articles_delete_file',{id: file.id}) }}"
-                          data-delete data-token="{{ csrf_token('delete' ~ file.id) }}" class="file-add"> supprimer</a>
+                          data-delete data-token="{{ csrf_token('delete' ~ file.id) }}" class="file-add" style="color: red"> <i class="las la-trash-alt"style="width: auto;height: auto"></i>supprimer</a>
                 </div>
                      </div>
             {% endfor %}

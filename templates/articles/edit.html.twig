@@ -6,13 +6,20 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.fd.css') }}">
 {% endblock %}
 {% block body %}
-    <h1>Edit Articles</h1>
+    <div class="container">
+        <div class=" d-grid gap-2 position-absolute " style="top:80px;left:260px;">
+            <a href="{{ path('articles_index') }}" class="btn btn-secondary  d-inline-block p-8 mr-2" role="button" style="color: snow;" data-toggle="tooltip" data-placement="top" title="revenez à la liste"><i class="las la-arrow-circle-left " style="width: 30px"></i></a>
+        </div>
+        <div class="big-title">
+            <h2>Editer Article </h2>
+            <div class="hr-title"></div>
+        </div>
 
-    {{ include('articles/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('articles/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('articles_index') }}">back to list</a>
 
-    {{ include('articles/_delete_form.html.twig') }}
+
+    </div>
 {% endblock %}
 {% block javascripts %}
     <script src="{{ asset('js/files.js') }}"></script>

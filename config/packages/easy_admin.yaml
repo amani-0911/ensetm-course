@@ -55,20 +55,20 @@ easy_admin:
       list:
         fields:
           - nom_dep
-          - { property: 'featured_image', label: 'Image', type: 'image', base_path: '%app.path.featured_image%' }
+          - { property: 'featured_image', label: 'Image', type: 'image', base_path: '%app.path.featured_images%' }
           - { property: 'filieres', label: 'filieres', type: 'array'}
       form:
         fields:
           - nom_dep
-          - { property: 'imageFile', type: 'vich_image', label: 'Image' }
+          - { property: 'imagefile', type: 'vich_image', label: 'Image' }
           - { property: 'filieres', label: 'filieres', type: 'entity', type_options: { class: 'App\Entity\Filieres', multiple: true,by_reference: false, attr: { data-widget: 'select2' }}}
     Filieres:
       class: App\Entity\Filieres
       label: 'Filieres'
       list:
         fields:
+          - id
           - nom
-          - article
           - { property: 'departements', label: 'departement'}
       form:
         fields:
@@ -87,4 +87,5 @@ easy_admin:
           - prenom
           - nom
           - email
-          - { property: 'roles', label: 'Rôles', type: choice, type_options: {expanded: true, multiple: true, choices: {'Utilisateur':'ROLE_USER', 'Administrateur':'ROLE_ADMIN', 'Etudient':'ROLE_ETUD', 'Enseignant':'ROLE_PROF', 'Responsable': 'ROLE_RESP'}}}
+          - { property: password, label: 'password', type: 'password' }
+          - { property: 'roles', label: 'Rôles', type: choice, type_options: {expanded: true, multiple: true, choices: {'Utilisateur':'ROLE_USER', 'Administrateur':'ROLE_ADMIN',  'Enseignant':'ROLE_PROF'}}}

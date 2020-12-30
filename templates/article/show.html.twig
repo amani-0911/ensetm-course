@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.titre }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+<div class="page-heading title-lg">
+    <div class="container">
+        <div class="container">
+            <div class="big-title"> </div>
+            <div class="row">
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                    <h3>
+                        <a  href="#" style="text-decoration: none;">
+                            {{ article.titre }}
+                        </a>
+                    </h3>
+                    <ul class="page-meta">
+                        <li>
+                            <i class="las la-folder-open"></i>
+                            {% for filiere in article.Filiers %}
+                                <a href="{{ path('Filiere',{id:filiere.id,slug:filiere.slug})}}" style="text-decoration: none" class="subject-label">
+                                    {{ filiere.nom}}
+                                </a>
+
+                            {% endfor %}
+                        </li>
+                        <li  data-toggle="tooltip" data-placement="top" title="l'enseignant">
+                            <a href="{{ path('enseignant', {'id': article.users.id}) }}">
+                                <i class="las la-user"></i>
+                                {{ article.users.prenom }}  {{ article.users.nom }}
+                            </a>
+                        </li>
+                        <li data-toggle="tooltip" data-placement="top" title="Publiè le">
+                            <i class="las la-clock"></i>
+                            {{ article.updatedAt ? article.updatedAt|date('d/m/y a h\\hi'): '' }}
+                        </li>
+                        <li  data-toggle="tooltip" data-placement="top" title="Nombre de fichiers">
+                            <i class="las la-file"></i>
+                            {{ article.files|length }}
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                    <div class="page-options">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="lessons">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <div class="lessons-list">
+                    {{ article.contenu|raw }}
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                <div class="widget">
+                    <h3>
+                        <i class="las la-cloud-download-alt"></i>
+                        Fichiers
+                    </h3>
+                    <div class="widget-body">
+                        <ul class="files-list">
+                            {% for file in article.files %}
+                                <li>
+                                    <div class="file-item">
+                                        <a href="{{ asset('/uploadsFile/' ~ file.name)}}" class="file-name" >
+                                            <i class="las la-file-alt"></i> {{ file.originalName }} </a>
+                                    </div>
+                                    <div style="clear: both;">
+
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="widget share-course">
+                    <h3>
+                        <i class="las la-share-alt-square"></i>
+                        Partagez le cours
+                    </h3>
+                    <div class="course-link-input">
+                        <input class="form-control" value="{{absolute_url(url)}}"  readonly>
+                    </div>
+                    <ul class="list-unstyled share-buttons">
+                        <li>
+                            <a  class="sharing-button facebook" href="https://facebook.com/sharer/sharer.php?u={{absolute_url(url)}}" title="facebook" target="_blank">
+                                <i class="lab la-facebook-square"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a  class="sharing-button email" href="mailto:?subject={{article.titre}}&body={{absolute_url(url)}}" title="email" target="_blank">
+                                <i class="las la-envelope"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a  class="sharing-button whatsapp" href="https://api.whatsapp.com/send?text={{absolute_url(url)}}" title="whatsapp" target="_blank">
+                                <i class="lab la-whatsapp"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

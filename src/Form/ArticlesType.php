@@ -32,8 +32,8 @@ class ArticlesType extends AbstractType
                 ]
             ])
             ->add('files', FileType::class,[
-                  'required' => false,
                   'label' => false,
+                'required' => false,
                   'multiple' => true,
                     'mapped' =>false
             ])
